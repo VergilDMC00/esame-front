@@ -35,20 +35,21 @@ function App() {
   useState(()=>{console.log("commessList:",commessList)},[commessList])
   useState(()=>{console.log("showTable:",showTable); show()},[showTable])
 
-  const getUser = () =>{
-    const {data:list}=axios.get('https://zenithar-dev.herokuapp.com/users', {
+  const getUser = async () =>{
+    const {data:list}= await axios.get('https://zenithar-dev.herokuapp.com/users', {
       headers: {
     'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOGIzOTRkNzA4OWY5MDAxNmRiYzlkMSIsImlhdCI6MTY1MzI5MTM4Mn0.z11A1VUEDgMQFVfVpNuRSeaVEAV0uLmsYoqLPhT-yUs'
     }
   });
+  console.log({list})
   setUserList(list)
   setShowTable("USER")
   show()
 }
 
 
-const getCommess = () =>{
-  const {data:list}=axios.get('https://zenithar-dev.herokuapp.com/orders', {
+const getCommess = async () =>{
+  const {data:list}= await axios.get('https://zenithar-dev.herokuapp.com/orders', {
     headers: {
   'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOGIzOTRkNzA4OWY5MDAxNmRiYzlkMSIsImlhdCI6MTY1MzI5MTM4Mn0.z11A1VUEDgMQFVfVpNuRSeaVEAV0uLmsYoqLPhT-yUs'
   }
@@ -63,6 +64,7 @@ show()
       <div>
         <button onClick={getUser}>USER</button>
         <button onClick={getCommess}>COMMESSE</button>
+        {show()}
       </div>
     )
 }
